@@ -1,14 +1,15 @@
-import React from 'react';
-import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/react';
+"use client";
+
+import React from "react";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   RowData,
   useReactTable,
-} from '@tanstack/react-table';
-
-import { cx } from '@/lib/utils';
+} from "@tanstack/react-table";
+import { cx } from "@/lib/utils";
 
 import {
   Table,
@@ -18,158 +19,109 @@ import {
   TableHeaderCell,
   TableRoot,
   TableRow,
-} from '@/components/Table';
+} from "@/components/Table";
 
-// This example requires @tanstack/react-table
-
+// Dados simulados para a tabela
 const workspaces = [
-  //array-start
   {
-    workspace: 'sales_by_day_api',
-
-    owner: 'John Doe',
-    status: 'live',
-    costs: '$3,509.00',
-    region: 'US-West 1',
-    capacity: '99%',
-    lastEdited: '23/09/2023 13:00',
+    workspace: "sales_by_day_api",
+    owner: "John Doe",
+    status: "live",
+    costs: "$3,509.00",
+    region: "US-West 1",
+    capacity: "99%",
+    lastEdited: "23/09/2023 13:00",
   },
   {
-    workspace: 'marketing_campaign',
-    owner: 'Jane Smith',
-    status: 'live',
-    costs: '$5,720.00',
-    region: 'US-East 2',
-    capacity: '80%',
-    lastEdited: '22/09/2023 10:45',
+    workspace: "marketing_campaign",
+    owner: "Jane Smith",
+    status: "live",
+    costs: "$5,720.00",
+    region: "US-East 2",
+    capacity: "80%",
+    lastEdited: "22/09/2023 10:45",
   },
   {
-    workspace: 'sales_campaign',
-    owner: 'Jane Smith',
-    status: 'live',
-    costs: '$5,720.00',
-    region: 'US-East 2',
-    capacity: '80%',
-    lastEdited: '22/09/2023 10:45',
+    workspace: "development_env",
+    owner: "Mike Johnson",
+    status: "live",
+    costs: "$4,200.00",
+    region: "EU-West 1",
+    capacity: "60%",
+    lastEdited: "21/09/2023 14:30",
   },
-  {
-    workspace: 'development_env',
-    owner: 'Mike Johnson',
-    status: 'live',
-    costs: '$4,200.00',
-    region: 'EU-West 1',
-    capacity: '60%',
-    lastEdited: '21/09/2023 14:30',
-  },
-  {
-    workspace: 'new_workspace_1',
-    owner: 'Alice Brown',
-    status: 'live',
-    costs: '$2,100.00',
-    region: 'US-West 2',
-    capacity: '75%',
-    lastEdited: '24/09/2023 09:15',
-  },
-  {
-    workspace: 'test_environment',
-    owner: 'David Clark',
-    status: 'inactive',
-    costs: '$800.00',
-    region: 'EU-Central 1',
-    capacity: '40%',
-    lastEdited: '25/09/2023 16:20',
-  },
-  {
-    workspace: 'analytics_dashboard',
-    owner: 'Sarah Wilson',
-    status: 'live',
-    costs: '$6,500.00',
-    region: 'US-West 1',
-    capacity: '90%',
-    lastEdited: '26/09/2023 11:30',
-  },
-  {
-    workspace: 'research_project',
-    owner: 'Michael Adams',
-    status: 'live',
-    costs: '$3,900.00',
-    region: 'US-East 1',
-    capacity: '70%',
-    lastEdited: '27/09/2023 08:45',
-  },
-  {
-    workspace: 'training_environment',
-    owner: 'Laura White',
-    status: 'live',
-    costs: '$2,500.00',
-    region: 'EU-North 1',
-    capacity: '55%',
-    lastEdited: '28/09/2023 12:15',
-  },
-  //array-end
 ];
 
-declare module '@tanstack/react-table' {
+// Definição da tipagem de `ColumnMeta`
+declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
     align: string;
+    displayName: string;
   }
 }
 
+// Configuração das colunas da tabela
 const workspacesColumns = [
-  //array-start
   {
-    header: 'Workspace',
-    accessorKey: 'workspace',
+    header: "Workspace",
+    accessorKey: "workspace",
     meta: {
-      align: 'text-left',
+      align: "text-left",
+      displayName: "Workspace",
     },
   },
   {
-    header: 'Owner',
-    accessorKey: 'owner',
+    header: "Owner",
+    accessorKey: "owner",
     meta: {
-      align: 'text-left',
+      align: "text-left",
+      displayName: "Owner",
     },
   },
   {
-    header: 'Status',
-    accessorKey: 'status',
+    header: "Status",
+    accessorKey: "status",
     meta: {
-      align: 'text-left',
+      align: "text-left",
+      displayName: "Status",
     },
   },
   {
-    header: 'Region',
-    accessorKey: 'region',
+    header: "Region",
+    accessorKey: "region",
     meta: {
-      align: 'text-left',
+      align: "text-left",
+      displayName: "Region",
     },
   },
   {
-    header: 'Capacity',
-    accessorKey: 'capacity',
+    header: "Capacity",
+    accessorKey: "capacity",
     meta: {
-      align: 'text-right',
+      align: "text-right",
+      displayName: "Capacity",
     },
   },
   {
-    header: 'Costs',
-    accessorKey: 'costs',
+    header: "Costs",
+    accessorKey: "costs",
     meta: {
-      align: 'text-right',
+      align: "text-right",
+      displayName: "Costs",
     },
   },
   {
-    header: 'Last edited',
-    accessorKey: 'lastEdited',
+    header: "Last edited",
+    accessorKey: "lastEdited",
     meta: {
-      align: 'text-right',
+      align: "text-right",
+      displayName: "Last Edited",
     },
   },
-  //array-end
 ];
 
-const Button = ({
+// Botão de navegação da paginação
+const PaginationButton = ({
   onClick,
   disabled,
   children,
@@ -191,13 +143,10 @@ const Button = ({
 };
 
 export default function Example() {
-  const pageSize = 8;
+  const pageSize = 5;
 
-  const data = React.useMemo(
-    // multiply dummy data to better demonstrate pagination over several pages
-    () => [...workspaces, ...workspaces, ...workspaces, ...workspaces],
-    [],
-  );
+  const data = React.useMemo(() => workspaces, []);
+
   const table = useReactTable({
     data: data,
     columns: workspacesColumns,
@@ -226,7 +175,7 @@ export default function Example() {
                   >
                     {flexRender(
                       header.column.columnDef.header,
-                      header.getContext(),
+                      header.getContext()
                     )}
                   </TableHeaderCell>
                 ))}
@@ -249,43 +198,45 @@ export default function Example() {
           </TableBody>
         </Table>
       </TableRoot>
+
+      {/* Paginação */}
       <div className="mt-10 flex items-center justify-between">
-        <p className="text-sm tabular-nums text-gray-500 dark:text-gray-500">
-          Page{' '}
+        <p className="text-sm tabular-nums text-gray-500 dark:text-gray-400">
+          Página{" "}
           <span className="font-medium text-gray-900 dark:text-gray-50">{`${
             table.getState().pagination.pageIndex + 1
-          }`}</span>{' '}
-          of
+          }`}</span>{" "}
+          de
           <span className="font-medium text-gray-900 dark:text-gray-50">
-            {' '}
+            {" "}
             {`${table.getPageCount()}`}
           </span>
         </p>
         <div className="inline-flex items-center rounded-full shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-800">
-          <Button
+          <PaginationButton
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <span className="sr-only">Previous</span>
+            <span className="sr-only">Anterior</span>
             <RiArrowLeftSLine
               className="size-5 text-gray-700 group-hover:text-gray-900 dark:text-gray-300 group-hover:dark:text-gray-50"
               aria-hidden={true}
             />
-          </Button>
+          </PaginationButton>
           <span
             className="h-5 border-r border-gray-300 dark:border-gray-800"
             aria-hidden={true}
           />
-          <Button
+          <PaginationButton
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <span className="sr-only">Next</span>
+            <span className="sr-only">Próximo</span>
             <RiArrowRightSLine
               className="size-5 text-gray-700 group-hover:text-gray-900 dark:text-gray-300 group-hover:dark:text-gray-50"
               aria-hidden={true}
             />
-          </Button>
+          </PaginationButton>
         </div>
       </div>
     </>

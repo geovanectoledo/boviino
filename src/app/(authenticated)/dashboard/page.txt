@@ -1,0 +1,280 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { AreaChart } from '@/components/AreaChart';
+
+// -------------------------------------------------------------------
+// 1) Dados e tipos auxiliares
+// -------------------------------------------------------------------
+
+/** Exemplo de dados "mockados" para o carrossel (próximos manejos). */
+const activities = [
+  { id: 1, type: "Vacina", description: "Vacina de brucelose", date: "20 fev 2025", icon: "/assets/icons/vaccine.svg" },
+  { id: 2, type: "Atendimento", description: "Cirurgia de hérnia", date: "15 mar 2025", icon: "/assets/icons/veterinarian.svg" },
+  { id: 3, type: "Remédio", description: "Remédio de carrapato", date: "02 abr 2025", icon: "/assets/icons/remedy.svg" },
+];
+
+
+// Define tipos para diários (com MAs) e mensais (sem MAs)
+type PriceItemDailyWithMA = {
+  date: string;
+  BRLprice: number;
+  BRLpriceMA5: number | null;
+  BRLpriceMA20: number | null;
+  BRLpriceMA100: number | null;
+};
+
+type PriceItemMonthly = {
+  date: string;
+  average_brl_price: number;
+};
+
+// -------------------------------------------------------------------
+// Formatação de data no eixo X
+// -------------------------------------------------------------------
+  function formatDate(dateString: string, filter: string) {
+    const dateObj = new Date(dateString);
+    switch (filter) {
+      case "30":
+      case "60":
+        return dateObj.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+      case "12":
+      case "24": {
+        const str = dateObj.toLocaleDateString("pt-BR", {
+          month: "short",
+          year: "numeric",
+          timeZone: "UTC",
+        });
+        return str.replace(". de ", " ").replace(".", "");
+      }
+      case "all":
+        return dateObj.getUTCFullYear().toString();
+      default:
+        return dateObj.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+    }
+  }
+
+
+
+// -------------------------------------------------------------------
+// Componente principal: Dashboard
+// -------------------------------------------------------------------
+
+export default function Dashboard() {
+
+  const [filter, setFilter] = useState("30");
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [categories, setCategories] = useState<string[]>(["Preço da arroba"]);
+
+
+  // -----------------------------------------------------------------
+  // 2.3) Lógica do carrossel (próximos manejos)
+  // -----------------------------------------------------------------
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const checkScrollPosition = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      checkScrollPosition();
+      carousel.addEventListener("scroll", checkScrollPosition);
+      return () => carousel.removeEventListener("scroll", checkScrollPosition);
+    }
+  }, []);
+
+  // -----------------------------------------------------------------
+  // useEffect para buscar dados da API conforme o filtro
+  // -----------------------------------------------------------------
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/prices?filter=${filter}`);
+        if (!res.ok) {
+          throw new Error(`Erro na API: ${res.status} - ${res.statusText}`);
+        }
+        const data = await res.json();
+
+        if (filter === "30" || filter === "60") {
+          const dailyData = data as PriceItemDailyWithMA[];
+          const transformedData = dailyData.map(d => ({
+            date: formatDate(d.date, filter),
+            "Preço da arroba": d.BRLprice || 0,
+            "Curva de 5 dias": d.BRLpriceMA5 ?? 0,
+            "Curva de 20 dias": d.BRLpriceMA20 ?? 0,
+            "Curva de 100 dias": d.BRLpriceMA100 ?? 0,
+          }));
+          setChartData(transformedData);
+          setCategories([
+            "Preço da arroba",
+            "Curva de 5 dias",
+            "Curva de 20 dias",
+            "Curva de 100 dias",
+          ]);
+        } else {
+          const monthlyData = data as PriceItemMonthly[];
+          const transformedData = monthlyData.map(m => ({
+            date: formatDate(m.date, filter),
+            "Preço da arroba": m.average_brl_price || 0,
+          }));
+          setChartData(transformedData);
+          setCategories(["Preço da arroba"]);
+        }
+      } catch (err) {
+        console.error("Erro ao buscar dados:", err);
+      }
+    }
+
+    fetchData();
+  }, [filter]);
+
+
+
+  // -----------------------------------------------------------------
+  // 2.6) Renderização do componente
+  // -----------------------------------------------------------------
+  return (
+    <div className={styles.pageWrapper}>
+
+      {/* -------------------------------------------
+         TÍTULO DA PÁGINA
+      ------------------------------------------- */}
+      <div className={styles.titleWrapper}>
+        <div className={styles.titleContainer}>
+          <span className={styles.title}>Visão geral</span>
+        </div>
+      </div>
+
+      {/* -------------------------------------------
+         AGENDA DE MANEJOS (CARROSSEL)
+      ------------------------------------------- */}
+      <div className={styles.moduleWrapper}>
+        <div className={styles.moduleHeader}>
+          <span className={styles.moduleTitle}>Próximos manejos</span>
+          <Link href="/authenticated/herd" className={styles.moduleLink}>
+            ver mais
+          </Link>
+        </div>
+
+        <div className={styles.carouselWrapper}>
+          {showLeftArrow && (
+            <button onClick={scrollLeft} className={`${styles.carouselButton} ${styles.leftButton}`}>
+              <Image src="/assets/icons/carousel-arrow-left.svg" alt="Scroll Left" width={24} height={24} />
+            </button>
+          )}
+
+          <div className={styles.carousel} ref={carouselRef}>
+            {activities.map((activity) => (
+              <div key={activity.id} className={styles.card}>
+                <div className={styles.cardInformation}>
+                  <button className={styles.iconCard}>
+                    <Image src={activity.icon} alt={activity.type} width={20} height={20} />
+                  </button>
+                  <span className={styles.cardDescription}>{activity.description}</span>
+                </div>
+                <div className={styles.cardDate}>
+                  <Image src="/assets/icons/calendar.svg" alt="Calendário" width={14} height={14} />
+                  <span className={styles.dateText}>{activity.date}</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Card de adicionar novo manejo */}
+            <div className={`${styles.card} ${styles.addCard}`}>
+              <button className={styles.addCardIcon}>
+                <Image src="/assets/icons/plus.svg" alt="Adicionar manejo" width={20} height={20} />
+              </button>
+              <span className={styles.addCardText}>Adicionar novo manejo</span>
+            </div>
+          </div>
+
+          {showRightArrow && (
+            <button onClick={scrollRight} className={`${styles.carouselButton} ${styles.rightButton}`}>
+              <Image src="/assets/icons/carousel-arrow-right.svg" alt="Scroll Right" width={24} height={24} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* -------------------------------------------
+         GRÁFICO DE PREÇOS
+      ------------------------------------------- */}
+      <div className={styles.moduleWrapper}>
+        <div className={styles.moduleHeader}>
+          <span className={styles.moduleTitle}>Preço do boi gordo</span>
+          <Link href="/authenticated/herd" className={styles.moduleLink}>
+            ver mais
+          </Link>
+        </div>
+
+        <div className={styles.moduleContainer}>
+
+          {/* BOTÕES DE FILTRO (HTML), simples e confiáveis */}
+          <div className={styles.filterButtons}>
+            <button onClick={() => setFilter("30")}>30 dias</button>
+            <button onClick={() => setFilter("60")}>60 dias</button>
+            <button onClick={() => setFilter("12")}>12 meses</button>
+            <button onClick={() => setFilter("24")}>24 meses</button>
+            <button onClick={() => setFilter("all")}>Desde o início</button>
+          </div>
+
+          {/* Container do Gráfico */}
+          <div className={styles.chartContainer}>
+            
+            <AreaChart
+              data={chartData}
+              index="date"
+              categories={categories}
+              // colors={["#1D3108", "#4280EF", "#FF9690", "#F6B704"]}
+              valueFormatter={(value: number) =>
+                value.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              }
+            />
+            
+          </div>
+        </div>
+      </div>
+
+      {/* -------------------------------------------
+         HISTÓRICO DE ATIVIDADES (EXEMPLO)
+      ------------------------------------------- */}
+      <div className={styles.moduleWrapper}>
+        <div className={styles.moduleHeader}>
+          <span className={styles.moduleTitle}>Atividades recentes</span>
+          <Link href="/authenticated/herd" className={styles.moduleLink}>
+            ver mais
+          </Link>
+        </div>
+        <div className={styles.moduleContainer}>
+          <p>Conteúdo do histórico...</p>
+        </div>
+      </div>
+
+    </div>
+  );
+}
