@@ -38,6 +38,6 @@
     "src/app/[blocksCategory]",
     "tailwind.config.js",
     "src/content/*.{js,ts,jsx,tsx,mdx}"
-  ],
+, "src/app/(main)/changelog/page.mdx"  ],
   "exclude": ["node_modules"]
 }

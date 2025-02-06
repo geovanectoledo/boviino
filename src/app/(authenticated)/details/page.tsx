@@ -1,5 +1,5 @@
-import { columns } from "@/app/ui/data-table/columns"
-import { DataTable } from "@/app/ui/data-table/DataTable"
+import { columns } from "@/app/ui/authenticated/data-table/columns"
+import { DataTable } from "@/app/ui/authenticated/data-table/DataTable"
 import { usage } from "@/data/data"
 
 export default function Example() {

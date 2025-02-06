@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://yoururl.com"),
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: [],
+  keywords: ["Marketing", "Database", "Software"],
   authors: [
     {
       name: "yourname",
@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    creator: "@yourname",
+  },
   icons: {
     icon: "/favicon.ico",
   },
@@ -43,14 +49,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} overflow-y-scroll scroll-auto antialiased selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
-        suppressHydrationWarning
+        className={`${inter.className} min-h-screen scroll-auto antialiased selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
       >
-        <div className="mx-auto max-w-screen-2xl">
-          <ThemeProvider defaultTheme="system" attribute="class">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+        >
           {children}
-          </ThemeProvider>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   )

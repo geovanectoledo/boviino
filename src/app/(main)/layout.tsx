@@ -1,14 +1,18 @@
-import { PropsWithChildren } from 'react';
+import "../global.css"
 
-import Footer from '../ui/footer';
-import SiteHeader from '../ui/site-header';
+import Footer from "@/app/ui/main/Footer"
+import { Navigation } from "@/app/ui/main/Navbar"
 
-export default function MarketingLayout({ children }: PropsWithChildren) {
+export default function PublicLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
-    <>
-      <SiteHeader />
+    <main className="flex flex-col overflow-hidden">
+      <Navigation />
       {children}
       <Footer />
-    </>
-  );
+    </main>
+  )
 }

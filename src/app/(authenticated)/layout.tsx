@@ -1,35 +1,8 @@
-import type { Metadata } from "next"
 import "../global.css"
-import { siteConfig } from "../siteConfig"
 
-import { Sidebar } from "@/app/ui/navigation/Sidebar"
+import { Sidebar } from "@/app/ui/authenticated/navigation/Sidebar"
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://yoururl.com"),
-  title: siteConfig.name,
-  description: siteConfig.description,
-  keywords: [],
-  authors: [
-    {
-      name: "yourname",
-      url: "",
-    },
-  ],
-  creator: "yourname",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
-}
-
-export default function RootLayout({
+export default function AuthenticatedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

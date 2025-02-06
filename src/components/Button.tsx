@@ -52,9 +52,9 @@ const buttonVariants = tv({
         // text color
         'text-gray-900 dark:text-gray-50',
         // background color
-        'bg-gray-200 dark:bg-gray-900',
+        'bg-gray-100 dark:bg-gray-900',
         // hover color
-        'hover:bg-gray-300/70 dark:hover:bg-gray-800/80',
+        'hover:bg-gray-200 dark:hover:bg-gray-800/80',
         // disabled
         'disabled:bg-gray-100 disabled:text-gray-400',
         'disabled:dark:bg-gray-800 disabled:dark:text-gray-600',
