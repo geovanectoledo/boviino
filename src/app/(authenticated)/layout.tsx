@@ -1,6 +1,7 @@
 import "../global.css"
 
-import { Sidebar } from "@/app/ui/authenticated/navigation/Sidebar"
+import { Navbar } from "@/app/ui/authenticated/navigation/Navbar"
+import { Submenu } from "@/app/ui/authenticated/navigation/Submenu"
 
 export default function AuthenticatedLayout({
   children,
@@ -9,10 +10,11 @@ export default function AuthenticatedLayout({
 }>) {
   return (
     <div className="mx-auto max-w-screen-2xl">
-        <Sidebar />
-        <main className="lg:pl-72">
+        <Navbar />
+        <Submenu />
+        <main>
           <div className="relative">
-            <div className="p-4 sm:px-6 sm:pb-10 sm:pt-10 lg:px-10 lg:pt-7">
+            <div className="p-6 sm:px-6 lg:px-20">
               {children}
             </div>
           </div>

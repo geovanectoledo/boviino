@@ -1,7 +1,7 @@
 import ThemeSwitch from "@/components/ThemeSwitch"
 import { RiArrowRightUpLine } from "@remixicon/react"
 import Link from "next/link"
-import Image from "next/image"
+import { Logos } from "./Logos"
 
 const navigation = {
   product: [
@@ -36,12 +36,9 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-3 pb-8 pt-16 sm:pt-24 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-20">
           <div className="space-y-8">
-            <Image
-              src="/icons/logo-large-dark.svg"
-              alt="Logo"
-              width={106}
-              height={28}
-            />
+            <div className="text-gray-900 dark:text-gray-200">
+              <Logos.Boviino className="w-28" />
+            </div>
             <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
               Redefining the way databases are built and managed. Built in
               Switzerland, made for the world.
@@ -73,10 +70,6 @@ export default function Footer() {
                         <span>{item.name}</span>
                         {item.external && (
                           <div className="ml-1 aspect-square size-3 rounded-full bg-gray-100 p-px dark:bg-gray-500/20">
-                            <RiArrowRightUpLine
-                              aria-hidden="true"
-                              className="size-full shrink-0 text-gray-900 dark:text-gray-300"
-                            />
                           </div>
                         )}
                       </Link>
@@ -184,20 +177,8 @@ export default function Footer() {
         </div>
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 sm:mt-20 sm:flex-row lg:mt-24 dark:border-gray-800">
           <p className="text-sm leading-5 text-gray-500 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} Database, Inc. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Boviino. Todos os direitos reservados.
           </p>
-          <div className="rounded-full border border-gray-200 py-1 pl-1 pr-2 dark:border-gray-800">
-            <div className="flex items-center gap-1.5">
-              <div className="relative size-4 shrink-0">
-                <div className="absolute inset-[1px] rounded-full bg-emerald-500/20 dark:bg-emerald-600/20" />
-                <div className="absolute inset-1 rounded-full bg-emerald-600 dark:bg-emerald-500" />
-              </div>
-              <span className="text-xs text-gray-700 dark:text-gray-50">
-                All systems operational
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </footer>

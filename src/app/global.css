@@ -93,3 +93,13 @@ a {
 *:hover > .anchor-link {
   @apply visible;
 }
+
+/* Esconder scroll horizontal no Tailwind */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

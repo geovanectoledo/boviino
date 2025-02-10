@@ -115,6 +115,7 @@ const workspacesColumns = [
     enableSorting: true,
     meta: {
       align: 'text-left',
+      displayName: "Workspace",
     },
   },
   {
@@ -123,6 +124,7 @@ const workspacesColumns = [
     enableSorting: true,
     meta: {
       align: 'text-left',
+      displayName: "Owner",
     },
   },
   {
@@ -131,6 +133,7 @@ const workspacesColumns = [
     enableSorting: false,
     meta: {
       align: 'text-left',
+      displayName: "Status",
     },
   },
   {
@@ -139,6 +142,7 @@ const workspacesColumns = [
     enableSorting: false,
     meta: {
       align: 'text-left',
+      displayName: "Region",
     },
   },
   {
@@ -147,6 +151,7 @@ const workspacesColumns = [
     enableSorting: false,
     meta: {
       align: 'text-left',
+      displayName: "Capacity",
     },
   },
   {
@@ -155,6 +160,7 @@ const workspacesColumns = [
     enableSorting: false,
     meta: {
       align: 'text-right',
+      displayName: "Costs",
     },
   },
   {
@@ -163,6 +169,7 @@ const workspacesColumns = [
     enableSorting: false,
     meta: {
       align: 'text-right',
+      displayName: "Last edited",
     },
   },
   //array-end

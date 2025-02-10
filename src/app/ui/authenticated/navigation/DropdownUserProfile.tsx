@@ -23,6 +23,7 @@ export function DropdownUserProfile({
   children,
   align = "start",
 }: DropdownUserProfileProps) {
+
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => {
     setMounted(true)
@@ -31,6 +32,7 @@ export function DropdownUserProfile({
   if (!mounted) {
     return null
   }
+
   return (
     <>
       <DropdownMenu>

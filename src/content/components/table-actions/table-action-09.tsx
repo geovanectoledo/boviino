@@ -163,6 +163,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-left',
+          displayName: "",
         },
       }),
       {
@@ -171,6 +172,7 @@ export default function TableCheckbox() {
         enableSorting: true,
         meta: {
           align: 'text-left',
+          displayName: "Workspace",
         },
       },
       {
@@ -179,6 +181,7 @@ export default function TableCheckbox() {
         enableSorting: true,
         meta: {
           align: 'text-left',
+          displayName: "Owner",
         },
       },
       {
@@ -187,6 +190,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-left',
+          displayName: "Status",
         },
       },
       {
@@ -195,6 +199,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-left',
+          displayName: "Region",
         },
       },
       {
@@ -203,6 +208,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-left',
+          displayName: "Capacity",
         },
       },
       {
@@ -211,6 +217,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-right',
+          displayName: "Costs",
         },
       },
       columnHelper.accessor('lastEdited', {
@@ -218,6 +225,7 @@ export default function TableCheckbox() {
         enableSorting: false,
         meta: {
           align: 'text-right',
+          displayName: "Last edited",
         },
         cell: ({ getValue }) => (
           <div className="relative">

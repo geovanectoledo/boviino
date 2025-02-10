@@ -9,8 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/Dropdown"
-import { cx, focusInput } from "@/lib/utils"
-import { RiArrowRightSLine, RiExpandUpDownLine } from "@remixicon/react"
+import {
+  ChevronsUpDown,
+} from "lucide-react"
 import React from "react"
 import { ModalAddWorkspace } from "./ModalAddWorkspace"
 
@@ -20,127 +21,25 @@ const workspaces = [
     name: "Bosque da Alvorada",
     initials: "BA",
     role: "Proprietário",
-    color: "bg-lime-600 dark:bg-lime-600",
+    color: "text-orange-500 dark:text-orange-500",
   },
   {
-    value: "fazenda-santa-nice",
+    value: "sitio-nova-campestre",
     name: "Sítio Nova Campestre",
     initials: "NC",
     role: "Gestor",
-    color: "bg-emerald-600 dark:bg-emerald-500",
+    color: "text-cyan-500 dark:text-cyan-500",
   },
   {
     value: "fazenda-santa-nice",
     name: "Fazenda Santa Nice",
     initials: "SN",
     role: "Membro",
-    color: "bg-teal-600 dark:bg-teal-500",
+    color: "text-fuchsia-600 dark:text-fuchsia-500",
   },
   // Add more workspaces...
 ]
 
-export const WorkspacesDropdownDesktop = () => {
-  const [dropdownOpen, setDropdownOpen] = React.useState(false)
-  const [hasOpenDialog, setHasOpenDialog] = React.useState(false)
-  const dropdownTriggerRef = React.useRef<null | HTMLButtonElement>(null)
-  const focusRef = React.useRef<null | HTMLButtonElement>(null)
-
-  const handleDialogItemSelect = () => {
-    focusRef.current = dropdownTriggerRef.current
-  }
-
-  const handleDialogItemOpenChange = (open: boolean) => {
-    setHasOpenDialog(open)
-    if (open === false) {
-      setDropdownOpen(false)
-    }
-  }
-  return (
-    <>
-      {/* sidebar (lg+) */}
-      <DropdownMenu
-        open={dropdownOpen}
-        onOpenChange={setDropdownOpen}
-        modal={false}
-      >
-        <DropdownMenuTrigger asChild>
-          <button
-            className={cx(
-              "flex w-full items-center gap-x-2.5 rounded-md border border-gray-300 bg-white p-2 text-sm shadow-sm transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-950 hover:dark:bg-gray-900",
-              focusInput,
-            )}
-          >
-            <span
-              className="flex aspect-square size-8 items-center justify-center rounded p-2 text-xs font-medium text-white bg-lime-600 dark:bg-lime-600"
-              aria-hidden="true"
-            >
-              BA
-            </span>
-            <div className="flex w-full items-center justify-between gap-x-4 truncate">
-              <div className="truncate">
-                <p className="truncate whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-50">
-                  Bosque da Alvorada
-                </p>
-                <p className="whitespace-nowrap text-left text-xs text-gray-700 dark:text-gray-300">
-                  Proprietário
-                </p>
-              </div>
-              <RiExpandUpDownLine
-                className="size-5 shrink-0 text-gray-500"
-                aria-hidden="true"
-              />
-            </div>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          hidden={hasOpenDialog}
-          onCloseAutoFocus={(event) => {
-            if (focusRef.current) {
-              focusRef.current.focus()
-              focusRef.current = null
-              event.preventDefault()
-            }
-          }}
-        >
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>
-              Propriedades ({workspaces.length})
-            </DropdownMenuLabel>
-            {workspaces.map((workspace) => (
-              <DropdownMenuItem key={workspace.value}>
-                <div className="flex w-full items-center gap-x-2.5">
-                  <span
-                    className={cx(
-                      workspace.color,
-                      "flex aspect-square size-8 items-center justify-center rounded p-2 text-xs font-medium text-white",
-                    )}
-                    aria-hidden="true"
-                  >
-                    {workspace.initials}
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
-                      {workspace.name}
-                    </p>
-                    <p className="text-xs text-gray-700 dark:text-gray-400">
-                      {workspace.role}
-                    </p>
-                  </div>
-                </div>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <ModalAddWorkspace
-            onSelect={handleDialogItemSelect}
-            onOpenChange={handleDialogItemOpenChange}
-            itemName="Adicionar propriedade"
-          />
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
-  )
-}
 
 export const WorkspacesDropdownMobile = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
@@ -167,24 +66,12 @@ export const WorkspacesDropdownMobile = () => {
         modal={false}
       >
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-x-1.5 rounded-md p-2 hover:bg-gray-100 focus:outline-none hover:dark:bg-gray-900">
-            <span
-              className={cx(
-                "flex aspect-square size-7 items-center justify-center rounded p-2 text-xs font-medium text-white bg-lime-600 dark:bg-lime-600",
-              )}
-              aria-hidden="true"
-            >
-              BA
-            </span>
-            <RiArrowRightSLine
-              className="size-4 shrink-0 text-gray-500"
-              aria-hidden="true"
-            />
+          <button className="flex items-center gap-x-2.5 rounded-md p-2 hover:bg-gray-100 focus:outline-none hover:dark:bg-gray-900">
             <div className="flex w-full items-center justify-between gap-x-3 truncate">
-              <p className="truncate whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-50">
+              <p className="pl-2 truncate whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-50">
                 Bosque da Alvorada
               </p>
-              <RiExpandUpDownLine
+              <ChevronsUpDown
                 className="size-4 shrink-0 text-gray-500"
                 aria-hidden="true"
               />
@@ -192,6 +79,7 @@ export const WorkspacesDropdownMobile = () => {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
+          align="end"
           className="!min-w-72"
           hidden={hasOpenDialog}
           onCloseAutoFocus={(event) => {
@@ -202,27 +90,18 @@ export const WorkspacesDropdownMobile = () => {
             }
           }}
         >
-          <DropdownMenuGroup>
+          <DropdownMenuGroup className="max-h-60 overflow-y-auto">
             <DropdownMenuLabel>
               Propriedades ({workspaces.length})
             </DropdownMenuLabel>
             {workspaces.map((workspace) => (
               <DropdownMenuItem key={workspace.value}>
                 <div className="flex w-full items-center gap-x-2.5">
-                  <span
-                    className={cx(
-                      workspace.color,
-                      "flex size-8 items-center justify-center rounded p-2 text-xs font-medium text-white",
-                    )}
-                    aria-hidden="true"
-                  >
-                    {workspace.initials}
-                  </span>
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                       {workspace.name}
                     </p>
-                    <p className="text-xs text-gray-700 dark:text-gray-300">
+                    <p className="text-xs font-base text-gray-500 dark:text-gray-500">
                       {workspace.role}
                     </p>
                   </div>

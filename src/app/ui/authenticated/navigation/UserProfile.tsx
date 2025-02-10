@@ -2,7 +2,9 @@
 
 import { Button } from "@/components/Button"
 import { cx, focusRing } from "@/lib/utils"
-import { RiMore2Fill } from "@remixicon/react"
+import {
+  EllipsisVertical,
+} from "lucide-react"
 
 import { DropdownUserProfile } from "./DropdownUserProfile"
 
@@ -26,7 +28,7 @@ export const UserProfileDesktop = () => {
           </span>
           <span>Geovane Toledo</span>
         </span>
-        <RiMore2Fill
+        <EllipsisVertical
           className="size-4 shrink-0 text-gray-500 group-hover:text-gray-700 group-hover:dark:text-gray-400"
           aria-hidden="true"
         />

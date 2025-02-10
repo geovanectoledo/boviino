@@ -240,6 +240,7 @@ const paymentsColumns = [
     accessorKey: 'amount',
     meta: {
       align: 'text-left',
+      displayName: "Amount",
     },
   },
   {
@@ -247,6 +248,7 @@ const paymentsColumns = [
     accessorKey: 'paymentMethod',
     meta: {
       align: 'text-left',
+      displayName: "Payment Method",
     },
   },
   {
@@ -254,6 +256,7 @@ const paymentsColumns = [
     accessorKey: 'status',
     meta: {
       align: 'text-left',
+      displayName: "Status",
     },
   },
   {
@@ -261,6 +264,7 @@ const paymentsColumns = [
     accessorKey: 'description',
     meta: {
       align: 'text-left',
+      displayName: "Description",
     },
   },
   {
@@ -268,6 +272,7 @@ const paymentsColumns = [
     accessorKey: 'customer',
     meta: {
       align: 'text-left',
+      displayName: "Customer",
     },
   },
   {
@@ -275,6 +280,7 @@ const paymentsColumns = [
     accessorKey: 'lastSeen',
     meta: {
       align: 'text-right',
+      displayName: "Last seen",
     },
   },
   //array-end

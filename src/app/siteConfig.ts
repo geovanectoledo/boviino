@@ -15,7 +15,8 @@ export const siteConfig = {
 
       // Links para sessão logada do site (authenticated)
       overview: "/overview",
-      details: "/details",
+      herd: "/herd",
+      market: "/market",
       users: "/users",
       settings: {
         general: "/settings/general",

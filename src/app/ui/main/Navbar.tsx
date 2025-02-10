@@ -1,7 +1,6 @@
 "use client"
 
 import { siteConfig } from "@/app/siteConfig"
-import { useTheme } from "next-themes"
 import { Button } from "@/components/Button"
 import useScroll from "@/lib/use-scroll"
 import { cx } from "@/lib/utils"
@@ -11,7 +10,7 @@ import {
 } from "lucide-react"
 
 import Link from "next/link"
-import Image from "next/image"
+import { Logos } from "./Logos"
 import React from "react"
 
 export function Navigation() {
@@ -32,7 +31,6 @@ export function Navigation() {
     }
   }, [])
 
-  const { theme } = useTheme() // Obtém o tema atual (light ou dark)
 
   return (
     <header
@@ -48,47 +46,36 @@ export function Navigation() {
         <div className="relative flex items-center justify-between">
           <Link href={siteConfig.baseLinks.home} aria-label="Home">
             <span className="sr-only">Boviino</span>
-            <Image
-              src={theme === "dark" ? "/icons/logo-large-light.svg" : "/icons/logo-large-dark.svg"}
-              alt="Logo"
-              width={106}
-              height={28}
-              priority
-            />
+            <div className="text-gray-900 dark:text-gray-200">
+              <Logos.Boviino className="w-28" />
+            </div>
           </Link>
           <nav className="hidden md:absolute md:left-1/2 md:top-1/2 md:block md:-translate-x-1/2 md:-translate-y-1/2 md:transform">
             <div className="flex items-center gap-10 font-medium">
-              <Link
-                className="px-2 py-1 text-gray-900 dark:text-gray-50"
-                href={siteConfig.baseLinks.about}
-              >
-                Sobre nós
+              <Link href={siteConfig.baseLinks.about}>
+                <Button className="hidden h-10 font-semibold md:flex" variant="ghost">
+                  Sobre nós
+                </Button>
               </Link>
-              <Link
-                className="px-2 py-1 text-gray-900 dark:text-gray-50"
-                href={siteConfig.baseLinks.pricing}
-              >
-                Planos
+              <Link href={siteConfig.baseLinks.pricing}>
+                <Button className="hidden h-10 font-semibold md:flex" variant="ghost">
+                  Funcionalidades
+                </Button>
               </Link>
-              <Link
-                className="px-2 py-1 text-gray-900 dark:text-gray-50"
-                href={siteConfig.baseLinks.changelog}
-              >
-                Novidades
-              </Link>
-              <Link
-                className="px-2 py-1 text-gray-900 dark:text-gray-50"
-                href={siteConfig.baseLinks.changelog}
-              >
-                Entrar
+              <Link href={siteConfig.baseLinks.changelog}>
+                <Button className="hidden h-10 font-semibold md:flex" variant="ghost">
+                  Novidades
+                </Button>
               </Link>
             </div>
           </nav>
-          <Button className="hidden h-10 font-semibold md:flex">
-            Criar conta
-          </Button>
+          <div className="flex gap-x-2">
+            <Button className="hidden h-10 font-semibold md:flex">
+              Entrar
+            </Button>
+          </div>
           <div className="flex gap-x-2 md:hidden">
-            <Button>Criar conta</Button>
+            <Button>Entrar</Button>
             <Button
               onClick={() => setOpen(!open)}
               variant="light"
@@ -110,13 +97,13 @@ export function Navigation() {
         >
           <ul className="space-y-4 font-medium">
             <li onClick={() => setOpen(false)}>
-              <Link href={siteConfig.baseLinks.about}>About</Link>
+              <Link href={siteConfig.baseLinks.about}>Sobre nós</Link>
             </li>
             <li onClick={() => setOpen(false)}>
-              <Link href={siteConfig.baseLinks.pricing}>Pricing</Link>
+              <Link href={siteConfig.baseLinks.pricing}>Funcionalidades</Link>
             </li>
             <li onClick={() => setOpen(false)}>
-              <Link href={siteConfig.baseLinks.changelog}>Changelog</Link>
+              <Link href={siteConfig.baseLinks.changelog}>Novidades</Link>
             </li>
           </ul>
         </nav>
