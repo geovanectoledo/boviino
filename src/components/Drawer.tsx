@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import * as DrawerPrimitives from '@radix-ui/react-dialog';
-import { RiCloseLine } from '@remixicon/react';
+import { X } from 'lucide-react';
 
 import { cx, focusRing } from '@/lib/utils';
 
@@ -112,9 +112,9 @@ const DrawerHeader = React.forwardRef<
       <DrawerPrimitives.Close asChild>
         <Button
           variant="ghost"
-          className="aspect-square p-1 hover:bg-gray-100 hover:dark:bg-gray-400/10"
+          className="rounded-lg p-1.5 text-gray-700 dark:text-gray-300 bg-gray-200/50 dark:bg-gray-900 hover:bg-gray-200 data-[state=open]:bg-gray-200 hover:dark:bg-gray-800 data-[state=open]:dark:bg-gray-800"
         >
-          <RiCloseLine className="size-6" aria-hidden="true" />
+          <X className="size-5" aria-hidden="true" />
         </Button>
       </DrawerPrimitives.Close>
     </div>

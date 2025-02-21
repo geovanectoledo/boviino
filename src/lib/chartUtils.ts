@@ -15,6 +15,18 @@ export const chartColors = {
     fill: 'fill-emerald-500',
     text: 'text-emerald-500',
   },
+  green: {
+    bg: 'bg-green-500',
+    stroke: 'stroke-green-500',
+    fill: 'fill-green-500',
+    text: 'text-green-500',
+  },
+  teal: {
+    bg: 'bg-teal-500',
+    stroke: 'stroke-teal-500',
+    fill: 'fill-teal-500',
+    text: 'text-teal-500',
+  },
   violet: {
     bg: 'bg-violet-500',
     stroke: 'stroke-violet-500',

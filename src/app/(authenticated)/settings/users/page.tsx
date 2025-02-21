@@ -22,10 +22,6 @@ import { RiAddLine, RiMore2Fill } from "@remixicon/react"
 export default function Users() {
   return (
     <>
-      <h1 className="text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-50">
-        Gestão de acessos
-      </h1>
-      <div className="mt-4 sm:mt-6 lg:mt-10">
       <section aria-labelledby="existing-users">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div>
@@ -224,7 +220,6 @@ export default function Users() {
           ))}
         </ul>
       </section>
-      </div>
     </>
   )
 }

@@ -103,3 +103,8 @@ a {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Garante que o tema do usuário seja aplicado corretamente no SSR */
+html[class="dark"] {
+  background-color: #111827; /* Tailwind gray-950 */
+}

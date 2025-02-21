@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/app/ui/main/Badge"
 import Benefits from "@/app/ui/main/Benefits"
 import TeamGallery from "@/app/ui/main/TeamGallery"

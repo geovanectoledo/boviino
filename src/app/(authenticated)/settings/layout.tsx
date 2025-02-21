@@ -1,13 +1,17 @@
-"use client"
+"use client";
 
-import { siteConfig } from "@/app/siteConfig"
+import React from "react"
+
+import { Card } from "@/components/Card"
 import { TabNavigation, TabNavigationLink } from "@/components/TabNavigation"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { siteConfig } from "@/app/siteConfig"
 
 const navigationSettings = [
-  { name: "Minha conta", href: siteConfig.baseLinks.settings.general },
-  { name: "Meu plano", href: siteConfig.baseLinks.settings.billing },
+  { name: siteConfig.baseLinks.settings.profile.label, href: siteConfig.baseLinks.settings.profile.href },
+  { name: siteConfig.baseLinks.settings.billing.label, href: siteConfig.baseLinks.settings.billing.href },
+  { name: siteConfig.baseLinks.settings.users.label, href: siteConfig.baseLinks.settings.users.href },
 ]
 
 export default function Layout({
@@ -15,24 +19,30 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
   const pathname = usePathname()
   return (
     <>
-      <h1 className="text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-50">
-        Configurações
-      </h1>
-      <TabNavigation className="mt-4 sm:mt-6 lg:mt-10">
-        {navigationSettings.map((item) => (
-          <TabNavigationLink
-            key={item.name}
-            asChild
-            active={pathname === item.href}
-          >
-            <Link href={item.href}>{item.name}</Link>
-          </TabNavigationLink>
-        ))}
-      </TabNavigation>
-      <div className="pt-6">{children}</div>
+
+        <h1 className="text-xl py-1 mb-4 font-semibold text-gray-900 dark:text-gray-50">
+          Configurações
+        </h1>
+
+        <Card>
+          <TabNavigation>
+            {navigationSettings.map((item) => (
+              <TabNavigationLink
+                key={item.name}
+                asChild
+                active={pathname === item.href}
+                className="px-5"
+              >
+                <Link href={item.href}>{item.name}</Link>
+              </TabNavigationLink>
+            ))}
+          </TabNavigation>
+          <div className="pt-6">{children}</div>
+        </Card>
     </>
   )
 }

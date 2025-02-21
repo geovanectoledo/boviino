@@ -5,12 +5,12 @@ import Footer from "@/app/ui/main/Footer"
 import { GlobalDatabase } from "@/app/ui/main/GlobalDatabase"
 import Hero from "@/app/ui/main/Hero"
 import LogoCloud from "@/app/ui/main/LogoCloud"
-import { Navigation } from "@/app/ui/main/Navbar"
+import { Navbar } from "@/app/ui/main/Navbar"
 
 export default function Home() {
   return (
     <main className="flex flex-col overflow-hidden">
-      <Navigation />
+      <Navbar />
       <Hero />
       <LogoCloud />
       <GlobalDatabase />

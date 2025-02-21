@@ -1,4 +1,5 @@
 "use client"
+
 import { ArrowAnimated } from "@/app/ui/main/ArrowAnimated"
 import { Badge } from "@/app/ui/main/Badge"
 import { Faqs } from "@/app/ui/main/Faqs"

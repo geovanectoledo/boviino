@@ -37,20 +37,25 @@ export function DropdownUserProfile({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
-        <DropdownMenuContent align={align}>
-          <DropdownMenuLabel>geovane@bosquedaalvorada.com.br</DropdownMenuLabel>
+        <DropdownMenuContent align={align} className="!min-w-58">
+          <DropdownMenuLabel>geovanectoledo@gmail.com</DropdownMenuLabel>
           <DropdownMenuLabel><ThemeSwitch /></DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuLabel>Configurações</DropdownMenuLabel>
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Link href={siteConfig.baseLinks.settings.general}>
-                Minha conta
+              <Link href={siteConfig.baseLinks.settings.profile.href}>
+                Perfil
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-            <Link href={siteConfig.baseLinks.settings.billing}>
-              Meu plano
+            <Link href={siteConfig.baseLinks.settings.billing.href}>
+              Plano
+            </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+            <Link href={siteConfig.baseLinks.settings.users.href}>
+              Usuários
             </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>

@@ -34,9 +34,9 @@ const variantStyles: Record<TabsListVariant, string> = {
   ),
   solid: cx(
     // base
-    'inline-flex items-center justify-center rounded-md p-1',
+    'inline-flex items-center justify-center gap-2 py-1',
     // background color
-    'bg-gray-100 dark:bg-gray-900',
+    // 'bg-gray-100 dark:bg-gray-900',
   ),
 };
 
@@ -70,8 +70,8 @@ function getVariantStyles(tabVariant: TabsListVariant) {
         // border hover
         'hover:border-gray-300 hover:dark:border-gray-400',
         // selected
-        'data-[state=active]:border-emerald-600 data-[state=active]:text-emerald-600',
-        'data-[state=active]:dark:border-emerald-600 data-[state=active]:dark:text-emerald-600',
+        'data-[state=active]:border-green-600 data-[state=active]:text-green-600',
+        'data-[state=active]:dark:border-green-500 data-[state=active]:dark:text-green-500',
         // disabled
         'data-[disabled]:pointer-events-none',
         'data-[disabled]:text-gray-300 data-[disabled]:dark:text-gray-700',
@@ -79,16 +79,16 @@ function getVariantStyles(tabVariant: TabsListVariant) {
     case 'solid':
       return cx(
         // base
-        'inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1 text-sm font-medium ring-1 ring-inset transition-all',
+        'inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1 bg-gray-100 dark:bg-gray-900 text-sm font-medium ring-1 ring-inset transition-all',
         // text color
         'text-gray-500 dark:text-gray-400',
         // hover
-        'hover:text-gray-700 hover:dark:text-gray-200',
+        'hover:bg-gray-300 hover:text-gray-700 hover:dark:bg-gray-400 hover:dark:text-gray-400',
         // ring
         'ring-transparent',
         // selected
-        'data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow',
-        'data-[state=active]:dark:bg-gray-950 data-[state=active]:dark:text-gray-50',
+        'data-[state=active]:bg-green-600 data-[state=active]:text-white',
+        'data-[state=active]:dark:bg-green-600 data-[state=active]:dark:text-white',
         // disabled
         'data-[disabled]:pointer-events-none data-[disabled]:text-gray-400 data-[disabled]:opacity-50 data-[disabled]:dark:text-gray-600',
       );

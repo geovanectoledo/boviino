@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-20">
           <div className="space-y-8">
             <div className="text-gray-900 dark:text-gray-200">
-              <Logos.Boviino className="w-28" />
+              <Logos.BoviinoLarge className="w-28" />
             </div>
             <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
               Redefining the way databases are built and managed. Built in

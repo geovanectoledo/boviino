@@ -1,64 +1,39 @@
-import type { Metadata } from "next"
-import { ThemeProvider } from "next-themes"
-import { Inter } from "next/font/google"
-import "./global.css"
-import { siteConfig } from "./siteConfig"
+"use client";
+import { useEffect, useState } from "react";
+import { ThemeProvider } from "next-themes";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Inter } from "next/font/google";
+import "./global.css";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-})
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://yoururl.com"),
-  title: siteConfig.name,
-  description: siteConfig.description,
-  keywords: ["Marketing", "Database", "Software"],
-  authors: [
-    {
-      name: "yourname",
-      url: "",
-    },
-  ],
-  creator: "yourname",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    creator: "@yourname",
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
-}
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-br" suppressHydrationWarning className="antialiased">
       <body
-        className={`${inter.className} min-h-screen scroll-auto antialiased selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
+        className={`${inter.className} min-h-screen scroll-auto antialiased selection:bg-green-100 selection:text-green-700 dark:bg-gray-950`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {/* Evita erro de hidratação renderizando apenas no cliente */}
+        {mounted ? (
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <NuqsAdapter>
+              <div>{children}</div>
+            </NuqsAdapter>
+          </ThemeProvider>
+        ) : null}
       </body>
     </html>
-  )
+  );
 }

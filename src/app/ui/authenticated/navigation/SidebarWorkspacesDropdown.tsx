@@ -9,9 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/Dropdown"
-import {
-  ChevronsUpDown,
-} from "lucide-react"
+import { Button } from "@/components/Button"
+import { ChevronsUpDown } from "lucide-react"
 import React from "react"
 import { ModalAddWorkspace } from "./ModalAddWorkspace"
 
@@ -41,7 +40,7 @@ const workspaces = [
 ]
 
 
-export const WorkspacesDropdownMobile = () => {
+export const WorkspacesDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
   const [hasOpenDialog, setHasOpenDialog] = React.useState(false)
   const dropdownTriggerRef = React.useRef<null | HTMLButtonElement>(null)
@@ -66,21 +65,18 @@ export const WorkspacesDropdownMobile = () => {
         modal={false}
       >
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-x-2.5 rounded-md p-2 hover:bg-gray-100 focus:outline-none hover:dark:bg-gray-900">
-            <div className="flex w-full items-center justify-between gap-x-3 truncate">
-              <p className="pl-2 truncate whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-50">
-                Bosque da Alvorada
-              </p>
-              <ChevronsUpDown
-                className="size-4 shrink-0 text-gray-500"
-                aria-hidden="true"
-              />
-            </div>
-          </button>
+
+            <Button
+              variant="ghost"
+              className="text-xs text-white font-medium rounded-full gap-2 bg-gray-800 hover:bg-gray-600 data-[state=open]:bg-gray-600">
+              <span className="ml-2">Bosque da Alvorada</span>
+              <ChevronsUpDown className="size-4" />
+            </Button>
+
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className="!min-w-72"
+          className="!min-w-60"
           hidden={hasOpenDialog}
           onCloseAutoFocus={(event) => {
             if (focusRef.current) {

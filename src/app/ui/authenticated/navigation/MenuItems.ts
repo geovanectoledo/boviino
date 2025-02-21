@@ -12,12 +12,14 @@ import {
 
 // Definição do menu exportado
 export const menuItems = [
-  { name: "Visão geral", href: siteConfig.baseLinks.overview, icon: Home },
-  { name: "Mercado", href: siteConfig.baseLinks.market, icon: ChartCandlestick },
-  { name: "Rebanho", href: siteConfig.baseLinks.herd, icon: FileStack },
-  { name: "Pastagens", href: siteConfig.baseLinks.herd, icon: MapPlus },
-  { name: "Finanças", href: siteConfig.baseLinks.herd, icon: CircleDollarSign },
-  { name: "Histórico", href: siteConfig.baseLinks.herd, icon: Activity },
-  { name: "Relatórios", href: siteConfig.baseLinks.herd, icon: FileChartColumn },
-  { name: "Usuários", href: siteConfig.baseLinks.users, icon: UsersRound },
+  { name: "Visão geral", section:"Visão geral", href: siteConfig.baseLinks.overview, icon: Home },
+  { name: "Mercado", section:"Mercado", href: siteConfig.baseLinks.market, icon: ChartCandlestick },
+  { name: "Rebanho", section:"Rebanho", href: siteConfig.baseLinks.herd, icon: FileStack },
+  { name: "Pastagens", section:"Pastagens", href: siteConfig.baseLinks.herd, icon: MapPlus },
+  { name: "Finanças", section:"Finanças", href: siteConfig.baseLinks.herd, icon: CircleDollarSign },
+  { name: "Histórico de atividades", section:"Histórico", href: siteConfig.baseLinks.herd, icon: Activity },
+  { name: "Relatórios", section:"Relatórios", href: siteConfig.baseLinks.herd, icon: FileChartColumn },
+  { name: "Minha conta", section:"Configurações", href: siteConfig.baseLinks.settings.billing, icon: UsersRound },
+  { name: "Meu plano", section:"Configurações", href: siteConfig.baseLinks.settings.billing, icon: UsersRound },
+  { name: "Gestão de acessos", section:"Configurações", href: siteConfig.baseLinks.settings.users, icon: UsersRound },
 ] as const;

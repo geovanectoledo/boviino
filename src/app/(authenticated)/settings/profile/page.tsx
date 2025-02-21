@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Checkbox } from "@/components/Checkbox"
@@ -19,7 +20,6 @@ import { roles } from "@/data/data"
 export default function General() {
   return (
     <>
-      <div className="space-y-10">
         <section aria-labelledby="personal-information">
           <form>
             <div className="grid grid-cols-1 gap-x-14 gap-y-8 md:grid-cols-3">
@@ -291,7 +291,6 @@ export default function General() {
             </div>
           </form>
         </section>
-      </div>
     </>
   )
 }

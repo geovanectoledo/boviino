@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { cx } from '@/lib/utils';
+import { cx } from "@/lib/utils";
 
-import { Card } from '@/components/Card';
-import { LineChart } from '@/components/LineChart';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/Tabs';
+import { LineChart } from "@/components/LineChart";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
+import { Card } from "@/components/Card"
 
 
 const data = [
@@ -67,8 +67,6 @@ const data = [
   { date: 'Set 26', 'Média móvel': 109.4, 'Preço da arroba': 129.1 },
 ];
 
-
-
 const summary = [
   {
     name: '07/02/2025',
@@ -86,17 +84,17 @@ const summary = [
     changeType: null,
   },
   {
-    name: 'vs. último dia',
+    name: 'vs. Último dia',
     value: '-R$ 2,30 (-0,70%)',
     changeType: 'negative',
   },
   {
-    name: 'vs. último mês',
+    name: 'vs. Média do último mês',
     value: '+R$ 1,16 (0,35%)',
     changeType: 'positive',
   },
   {
-    name: 'vs. último ano',
+    name: 'vs. Média do último ano',
     value: '+R$ 73,04 (29,01%)',
     changeType: 'positive',
   },
@@ -132,19 +130,14 @@ const tabs = [
 const valueFormatter = (number: number) =>
   `R$ ${Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(number)}`;
 
-export default function Example() {
+export default function Market() {
   return (
     <>
-    <section aria-labelledby="market">
-
-      <Card className="p-0">
-        <div className="p-6">
-          <h1
-            id="market"
-            className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-50"
-          >
-            Preço do boi gordo
-          </h1>
+      <h1 className="text-xl py-1 mb-4 font-semibold text-gray-900 dark:text-gray-50">
+        Preço do boi gordo
+      </h1>
+      <Card>
+        <div>
           <h3 className="text-sm text-gray-500 dark:text-gray-500">
             07/02/2025
           </h3>
@@ -161,22 +154,24 @@ export default function Example() {
           </p>
         </div>
 
-        <Tabs defaultValue={tabs[2].name}>
-          <TabsList variant="line" className="px-6 overflow-x-auto scrollbar-hide">
+        <Tabs defaultValue={tabs[0].name}>
+          <div className="mt-6 overflow-x-auto scrollbar-hide">
+          <TabsList variant="solid" className="">
             {tabs.map((tab) => (
               <TabsTrigger key={tab.name} value={tab.name}>
                 {tab.name}
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="mt-6 px-6">
+          </div>
+          <div className="mt-6">
             {tabs.map((tab) => (
               <TabsContent key={tab.name} value={tab.name}>
                 <LineChart
                   data={tab.dataRange}
                   index="date"
                   categories={['Preço da arroba', 'Média móvel']}
-                  colors={['blue', 'cyan']}
+                  colors={['green', 'teal']}
                   valueFormatter={valueFormatter}
                   yAxisWidth={80}
                   tickGap={10}
@@ -187,7 +182,7 @@ export default function Example() {
                   data={tab.dataRange}
                   index="date"
                   categories={['Preço da arroba', 'Média móvel']}
-                  colors={['blue', 'cyan']}
+                  colors={['green', 'teal']}
                   valueFormatter={valueFormatter}
                   showYAxis={false}
                   showLegend={false}
@@ -199,7 +194,7 @@ export default function Example() {
           </div>
         </Tabs>
 
-        <div className="p-6">
+        <div className="mt-6">
           <h4 className="text-sm font-medium text-gray-900 dark:text-gray-50">
             Resumo
           </h4>
@@ -245,12 +240,11 @@ export default function Example() {
             </ul>
           </div>
         </div>
-      </Card>
+
       <p className="mt-6 text-xs font-base text-gray-500 dark:text-gray-500">
         Fonte: CEPEA
-      </p>
-
-    </section>  
+      </p> 
+      </Card>
     </>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Balancer from "react-wrap-balancer"
 
 export default function Layout({

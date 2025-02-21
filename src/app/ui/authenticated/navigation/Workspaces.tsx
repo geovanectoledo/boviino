@@ -2,21 +2,21 @@
 
 import { Button } from "@/components/Button"
 import { cx, focusRing } from "@/lib/utils"
-import { ChevronsUpDown, UsersRound } from "lucide-react"
+import { ChevronsUpDown } from "lucide-react"
 
-import { DropdownUserProfile } from "./DropdownUserProfile"
+import { DropdownWorkspaces } from "./DropdownWorkspaces"
 
 interface UserProfileDesktopProps {
   isCollapsed?: boolean
 }
 
-export const UserProfileDesktop = ({
+export const WorkspacesDesktop = ({
   isCollapsed,
 }: UserProfileDesktopProps) => {
   return (
-    <DropdownUserProfile>
+    <DropdownWorkspaces>
       <Button
-        aria-label="User settings"
+        aria-label="Workspaces"
         variant="ghost"
         className={cx(
           isCollapsed ? "justify-center" : "justify-between",
@@ -27,15 +27,15 @@ export const UserProfileDesktop = ({
         {isCollapsed ? (
           // h-8 to avoid layout shift with icon shown in isCollapsibled == false
           <div className="flex items-center">
-            <UsersRound
+            <ChevronsUpDown
               className="size-5 shrink-0 text-gray-500 group-hover:text-gray-700 dark:text-gray-500 group-hover:dark:text-gray-300"
               aria-hidden="true"
             />
           </div>
         ) : (
-          <span className="flex items-center px-1">
+          <span className="flex items-center gap-x-4 px-1">
             <span className={cx(isCollapsed ? "hidden" : "block")}>
-              Geovane Toledo
+              Bosque da Alvorada
             </span>
           </span>
         )}
@@ -46,25 +46,32 @@ export const UserProfileDesktop = ({
           />
         )}
       </Button>
-    </DropdownUserProfile>
+    </DropdownWorkspaces>
   )
 }
 
-export const UserProfileMobile = () => {
+export const WorkspacesMobile = () => {
   return (
-    <DropdownUserProfile align="end">
-      <Button
-        aria-label="User settings"
+    <DropdownWorkspaces align="end">
+        <Button
+        aria-label="Workspaces"
         variant="ghost"
         className={cx(
-          "group flex items-center rounded-lg p-2 text-sm font-medium bg-gray-200/50 dark:bg-gray-900 hover:bg-gray-200 data-[state=open]:bg-gray-200 hover:dark:bg-gray-800 data-[state=open]:dark:bg-gray-800",
+        "group flex items-center rounded-lg gap-x-2 px-2 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-200/50 dark:bg-gray-900 hover:bg-gray-200 data-[state=open]:bg-gray-200 hover:dark:bg-gray-800 data-[state=open]:dark:bg-gray-800",
         )}
-      >
-        <UsersRound
-          className="size-4 shrink-0 text-gray-700 dark:text-gray-300"
-          aria-hidden="true"
+        >
+        <span className="flex items-center px-1">
+            <span>
+            Bosque da Alvorada
+            </span>
+        </span>
+        <ChevronsUpDown
+            className="size-4 shrink-0 text-gray-500 group-hover:text-gray-700 group-hover:dark:text-gray-400"
+            aria-hidden="true"
         />
-      </Button>
-    </DropdownUserProfile>
+        </Button>
+    </DropdownWorkspaces>
   )
 }
+
+
